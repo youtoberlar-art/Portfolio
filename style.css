@@ -1,0 +1,815 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* rang nomini o`zgarish */
+:root {
+  --bg: #f5f2ec;
+  --ink: #1a1814;
+  --accent: #c8522a;
+  --muter: #8a8070;
+  --border: #e0d9ce;
+  --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.navbar {
+  /* brauzer birinchi qismi */
+  position: fixed; /* muzlatib qo`yadi */
+  top: 0; /* tepadan joy olamydi  */
+  left: 0; /* chapdan joy olmaydi */
+  right: 0; /* o`ngdan joy olaydi */
+  z-index: 100; /*  yozilgan hamma element ustida turadi */
+  display: flex; /* flexboxni ishlatadi */
+  align-items: center; /* pastan markazga suradi */
+  justify-content: space-between; /* yonchasiga markazga suradi  */
+  padding: 22px 48px; /* ramka ichiga Yuqori va pastdan: 22px Chap va o'ngdan: 48px qillib beryapti*/
+  background: rgba(26, 24, 20, 0.85); /* Yarim shaffof fon rangi beradi */
+  backdrop-filter: blur(12px); /* Element orqasidagi fonni xiralashtiradi */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* pastki qismga 1px beradi va shafoflik qiladi  */
+}
+.navbar-logo {
+  font-family: "DM Serif Display", serif; /* yozuni o`zgartiradi */
+  font-size: 21px; /* so`zga razmer beradi */
+  color: var(--bg); /* nomi o`zgartirilga rang bilan so`z rangi o`zgaryapti */
+  letter-spacing: 1px; /* harif orasiga joy taylayapti */
+}
+.navbar-links {
+  list-style: none; /*<ul> yoki <ol> dagi nuqta va raqamlarni olib tashlaydi.*/
+  display: flex; /*  flexboxni ishlatadi */
+  gap: 40px; /* so`z orasiga bosh joy beradi */
+}
+.navbar-links a {
+  text-decoration: none; /* a tag ishlatganda so`z tagidagi chiziqni yo`qotadi */
+  color: rgba(245, 242, 236, 0.5); /* so`zga Yarim shaffof  rangi beradi*/
+  font-size: 14px; /* so`zga razmer beradi */
+  padding: 5px 11px; /* ramka ichiga Yuqori va pastdan: 5px Chap va o'ngdan: 11px qillib beryapti*/
+  border-radius: 4px; /* b.radius ramka qirg`oqlarini yumaloqlashtiradi  */
+  transition: color 0.3s ease backround 0.3s ease; /* Rang va fon o'zgarishini animatsiyali qiladi */
+}
+.navbar-links a:hover {
+  color: #fff; /* Oqartiradi */
+  background: rgba(255, 255, 255, 0.08); /* Yarim shaffof fon beradi */
+}
+.hero {
+  position: relative; /* Elementni o'z joyiga nisbatan joylashtiradi. */
+  min-height: 100vh; /* Ekran balandligining 100% ini egallaydi */
+  display: flex; /* Elementlarni ustun shaklida joylashtiradi */
+  flex-direction: column; /* Elementlarni ustun shaklida joylashtirad */
+  align-items: center; /* bo`yiga markazga oladi*/
+  justify-content: center; /* eniga markazga oladi*/
+  overflow: hidden; /* ramkaga sig`maganini kesib tashlaydi */
+  text-align: center; /* so`zni markazga oladi */
+}
+.hero-bg-img {
+  position: absolute; /* relativga nisbatan ishlaydi*/
+  inset: 0; /* hammasini o`rniga qo`yiladi*/
+  background: url("https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80")
+    /* rasm qo`yish*/ center/cover no-repeat;
+  transform: scale(1.05); /* rasm kattalashadi*/
+  transition: transform 8s ease; /*  rasm davomilik vaqti*/
+}
+.hero:hover .hero-bg-img {
+  transform: scale(1); /* mishkani yo`naltirganda 1 kattalashadi*/
+}
+.hero-overlay {
+  position: absolute; /* relativga nisbatan ishlaydi*/
+  inset: 0; /* hammasini o`rniga qo`yiladi*/
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 24, 20, 0.75) 0%,
+    rgba(26, 24, 20, 0.55) 40%,
+    /* qora rang beryapti */ rgba(26, 24, 20, 0.8) 100%
+  );
+}
+.hero-center {
+  position: relative; /* absolutga nisbatan ishlaydi*/
+  z-index: 2; /* ramkani boshiga oladi  */
+  padding: 0 32px; /* ramka ichiga joy beradi tepa pasga 0 , o`ng chap 32px beradi */
+  max-width: 750px; /* ekranni max 750px  oladi  */
+}
+.hero-eyebrow {
+  font-size: 12px; /* so`zga o`lcham beradi */
+  letter-spacing: 3px; /* harif orasiga joy beradi */
+  text-transform: uppercase; /* hamma harifni katta qiladi */
+  color: var(--accent); /* so`zga rang beradi */
+  margin-bottom: 20px; /* pastdan 20px joy oladi */
+  animation: nam 1s forwards; /* 1 tada birnechta ko`dni ichiga oladi */
+  animation-delay: 1s; /*animatsiyani 1s kechiktiradi  */
+  opacity: 0; /* shaffoflik beradi*/
+}
+@keyframes nam {
+  from {
+    transform: translateY(120px); /* tepaga siljitish */
+    opacity: 0; /* shaffoflik beradi*/
+  }
+  to {
+    transform: translateY(-0); /* tepaga siljitish */
+    opacity: 1; /* shaffoflik beradi*/
+  }
+}
+.heor-title {
+  font-family: "DM Serif Display", serif; /* shirftni o`zgartiradi */
+  font-size: clamp(64px, 9vw, 120px); /* so`zga o`lcham beradi */
+  line-height: 1; /* qator o`rtasiga joy tashlaydi*/
+  letter-spacing: -1px; /* harif orasiga joy beradi */
+  color: #fff; /* so`zga rang beradi */
+  transform: translateY(24px); /* tepaga siljitish */
+  animation: nem 1s forwards; /* 1 tada birnechta ko`dni ichiga oladi */
+  animation-delay: 2s; /*animatsiyani 2s kechiktiradi  */
+  opacity: 0; /* shaffoflik beradi*/
+}
+@keyframes nem {
+  from {
+    transform: translateY(120px); /* tepaga siljitish */
+    opacity: 0; /* shaffoflik beradi*/
+  }
+  to {
+    transform: translateY(-0); /* tepaga siljitish */
+    opacity: 1; /* shaffoflik beradi*/
+  }
+}
+
+.heor-title em {
+  font-style: italic;
+  color: var(--accent); /* so`zga rang beradi */
+}
+.hero-desc {
+  margin-top: 26px; /* ramka tepasiga 26px joy beradi */
+  font-size: 17px; /* so`zga o`lcham beradi */
+  color: rgba(245, 242, 236, 0.6); /* so`zga rang beradi */
+  max-width: 480px; /* eniga max 480px joy beryapti */
+  margin-left: auto; /* chap tomondan avtomatik joy oladi */
+  margin-right: auto; /* o`ng tomondan avtomatik joy oladi */
+  transform: translateY(16px); /* tepaga siljitish */
+}
+.hero-actions {
+  display: flex; /* flex chaqiryapti*/
+  align-items: center; /* bo`yiga markazga oladi*/
+  justify-content: center; /* eniga markazga oladi*/
+  margin-top: 40px; /* ramka tepasidan 40px joy beryapti */
+  gap: 19px; /* so`z orasiga bosh joy */
+}
+.btn {
+  display: inline-block; /*  inline-block chaqiryapti */
+  padding: 14px 35px; /* ramka ichiga joy beradi tepa pasga 14px , o`ng chap 35px beradi */
+  background: var(--accent); /* orqa fonga rang berish */
+  color: #fff; /* so`zga rang berish */
+  text-decoration: none; /* chizig`ni olib tashlash */
+  font-size: 14px; /* so`zga o`lcham berish */
+  letter-spacing: 1px; /* harif orasiga joy berish */
+  text-transform: uppercase; /* hamma harifni kattada qiladi */
+  border: 1px solid var(--accent); /* chizig` razmeri va rangi */
+  transition:
+    background var(--transition),
+    /* orqa fonga animatsiya vaqtini beryapti */ color var(--transition),
+    /* so`zga animatsiya vaqtini beryapti  */ transform var(--transition); /**/
+}
+.btn:hover {
+  background: transparent; /* orqa fonga rang berish */
+  color: var(--accent); /* so`zga rang berish */
+  transform: translateY(-2px); /* tepaga siljitish */
+}
+.btn-ghost {
+  display: inline-block; /*  inline-block chaqiryapti */
+  padding: 14px 35px; /* ramka ichiga tepa, pasga 14px va chap ,o`ng 35px beradi */
+  background: transparent; /**/
+  color: rgba(245, 242, 236, 0.6); /* so`zga rang beradi*/
+  text-decoration: none; /* chizig`ni olib tashlaydi*/
+  font-size: 14px; /* so`zga o`lcham berdi*/
+  letter-spacing: 1px; /* harif orasiga joy beradi*/
+  text-transform: uppercase; /* hamma harifni tata qiladi*/
+  border: 1px solid rgba(255, 255, 255, 0.2); /* ramcha cchizig`i 1px va rang beradi*/
+  transition:
+    color var(--transition),
+    /* so`zga animatsiya vaqtini beryapti  */ border-color var(--transition),
+    /* ramka animatsiya vaqtini beradi*/ transform var(--transition); /**/
+}
+.btn-ghost:hover {
+  color: #fff; /* so`zga rang berish */
+  border-color: rgba(255, 255, 255, 0.2); /* ramka chizig`larga rang berish*/
+  transform: translateY(-2px); /* tepaga siljitish */
+}
+/* stat qilish */
+.hero-stats {
+  width: 100%; /* eniga  100% ekranni oladi*/
+  position: relative; /*  absolitega nisbatan ishlaydi*/
+  bottom: -100px; /* pastdan -100px olyapti  */
+  left: 0; /* chap tomondan 0 oladi*/
+  right: 0; /* o`ng tomondan 0 oladi */
+  z-index: 2; /* ramkani boshiga oladi  */
+  display: flex; /* flex chaqiradi*/
+  align-items: center; /* bo`yiga markazga oladi*/
+  justify-content: center; /* eniga markazga oladi*/
+  background: rgba(26, 24, 20, 0.6); /* orqa fonga rang beradi*/
+  backdrop-filter: blur(10px); /* orqa fondagi efektlar */
+  border-top: 1px solid rgba(255, 255, 255, 0.06); /* ramka chizig`i va rang beradi*/
+}
+.hero-stat {
+  display: flex; /* flex chaqiradi */
+  flex-direction: column; /* Elementlarni ustun shaklida joylashtirad */
+  align-items: center; /* bo`yiga markazga oladi*/
+  padding: 24px 56px; /* ramka ichiga tepa, pasga 24px va chap ,o`ng 56px beradi */
+  gap: 3px; /* so`z orasiga joy tashaydi */
+}
+.hero-stat-divider {
+  width: 1px; /* enidan 1px suradi */
+  height: 36px; /* bo`yidan 36px suradi */
+  background: rgba(255, 255, 255, 0.1); /* orqa fonga rang berish */
+}
+.stat-num {
+  font-family: "DM Serif Display", serif; /* shiriftni o`zgartirish */
+  font-size: 29px; /* so`zni o`lchami */
+  color: #fff; /* so`z rangi */
+  line-height: 1; /* qatorlar orasiga joy berish */
+}
+.stat-label {
+  font-size: 11px; /* so`zni o`lchami */
+  letter-spacing: 2px; /* harif orasiga joy */
+  text-transform: uppercase; /* hamma harfni katta kiladi */
+  color: rgba(245, 242, 236, 0.4); /* so`zga rang*/
+}
+/* SHARDER */
+.about-label {
+  font-size: 12px; /* so`zni o`lchami */
+  letter-spacing: 3px; /* harif orasiga joy */
+  text-transform: uppercase; /* hamma harfni katta kiladi */
+  color: var(--accent); /* so`zga rang*/
+  margin-bottom: 16px; /* pastdan 16px joy beryapti */
+}
+.section-title {
+  font-family: "DM Serif Display", serif; /* shiriftni o`zgartirish */
+  font-size: clamp(35px, 4vw, 48px); /* so`zni o`lchami */
+  line-height: 1.1; /* qatorlar orasiga joy berish */
+  letter-spacing: -1px; /* harif orasiga joy */
+  margin-bottom: 24px; /* pastdan 16px joy beryapti */
+  color: var(--ink); /* so`zga rang*/
+}
+
+/* ABOUT */
+.about {
+  padding: 128px 48px; /* ramka ichiga tepa, pasga 128px va chap ,o`ng 48px beradi */
+  border-top: 1px solid var(--border); /* ramka chizig`i va rang beradi*/
+}
+.about-inner {
+  max-width: 1100px; /* eniga 1100px max  */
+  margin: 0 auto; /* ramka tepasidan 0 pastidanam 0 va chap ,o`ng auto joy olsin */
+  display: grid; /* grid chaqirish */
+  grid-template-columns: 420px 1fr; /* ekranni 2 ga bo`lish 1 qismi 420px 2- qolgan joyni*/
+  gap: 98px; /* so`z orasiga joy tashlash*/
+  align-items: center; /* bo`yiga markazga oladi*/
+}
+/* chap rasm */
+.about-img-wrap {
+  position: relative; /* absolitga nisbatan ishlaydi*/
+}
+.about-img {
+  width: 100%; /* ekranni 100% deb oladi*/
+  aspect-ratio: 3/4; /* 3/4 rasmi shakli*/
+  background-image: url(photo_2026-06-29_18-03-59.jpg); /* rasm qo`yish */
+  background-position: center; /*  */
+  position: relative; /* absolitga nisbatan ishlaydi*/
+  overflow: hidden; /* ramkaga so`z sig`masa kesb tashlaydi*/
+}
+.about-img::after {
+  content: "A.N."; /* matn yozish uchun*/
+  position: absolute; /*relative ga nisbatan ishlaydi*/
+  inset: 0; /*hammasini o`rniga qo`yiladi*/
+  display: flex; /* flex chaqirish*/
+  align-items: center; /* bo`yiga markazga oladi*/
+  justify-content: center; /* eniga markazga oladi*/
+  font-family: "DM Serif Display", serif; /* shiriftni o`zgartirish */
+  font-size: 96px; /* so`zni o`lchami */
+  color: rgba(255, 255, 255, 0.2); /* so`zga rang*/
+  letter-spacing: -3px; /* harif orasiga joy */
+}
+.about-img-border {
+  position: absolute; /*relative ga nisbatan ishlaydi*/
+  top: 18px; /* tepadan 18px suradi*/
+  left: 18px; /* chapdan 18px suradi*/
+  right: -18px; /* o`ngdan -18px suradi*/
+  bottom: -18px; /* pasdan -18px suradi */
+  border: 1px solid rgba(200, 82, 42, 0.3); /* ramcha cchizig`i 1px va rang beradi*/
+  z-index: -1; /* ramkani boshiga oladi  */
+  transition:
+    top var(--transition),
+    left var(--transition); /**/
+}
+.about-img-wrap:hover .about-img-border {
+  top: 10px; /* tepadan 10px suradi*/
+  left: 10px; /* chapdan 10px suradi*/
+}
+.about-img-tag {
+  position: absolute; /*relative ga nisbatan ishlaydi*/
+  bottom: 32px; /* pasdan 32px suradi */
+  right: -32px; /* o`ngdan -32px suradi*/
+  background: var(--ink); /* orqa fonga rang berish */
+  color: #fff; /* so`zga rang beradi */
+  padding: 16px 22px; /* ramka ichiga tepa, pasga 16px va chap ,o`ng 22px beradi */
+  display: flex; /*  flex chaqirish*/
+  flex-direction: column; /* Elementlarni ustun shaklida joylashtirad */
+  align-items: center; /* bo`yiga markazga oladi*/
+  gap: 3px; /* so`z orasiga joy tashlash*/
+}
+.about-img-tag .stat-num {
+  font-size: 26px; /* so`z o`lchami */
+}
+.about-img-tag .stat-label {
+  color: rgba(255, 255, 255, 0.5); /* so`z rangi */
+}
+/* O`ng matn */
+.about-content .about-label {
+  color: var(--muter); /* so`z rangi */
+}
+.about-text {
+  color: var(--muter); /* so`z rangi */
+  font-size: 16px; /* so`z o`lchami */
+  margin-bottom: 19px; /* pasdan 19px joy oladi*/
+  max-width: 480px; /* eniga max 480px joy ajratadi*/
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+}
+
+.skill-item {
+  display: flex; /* flex chaqirish*/
+  align-items: center; /* bo`yiga markazga oladi*/
+  gap: 24px; /* so`z orasiga joy tashlaydi */
+  padding: 16px; /* ramka ichida 16px joy beradi*/
+  border-bottom: 1px solid var(--border);
+  transition: padding-left var(--transition);
+  cursor: pointer; /* mishkani qol holatiga aylantiradi*/
+}
+.skill-item:hover {
+  padding-left: 13px;
+}
+.skill-item:hover .skill-name {
+  color: var(--accent);
+}
+.skill-num {
+  font-size: 11px;
+  font-weight: 400;
+  transition: color var(--transition);
+}
+.skill-name {
+  font-size: 16px;
+  font-weight: 400;
+  transition: color var(--transition);
+}
+/* work */
+
+.work {
+  padding: 128px 48px;
+  background: var(--ink);
+}
+.work-header {
+  max-width: 1100px;
+  margin: 0 auto 64px;
+}
+.work .about-label {
+  color: rgba(245, 242, 236, 0.4);
+}
+.work .section-title {
+  color: var(--bg);
+}
+.cards {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.card {
+  background: #232018;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); /* soya qo`yish */
+}
+.card-thumb {
+  height: 200px;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-thumb {
+  transform: scale(1.05);
+}
+.thumb-1 {
+  background: linear-gradient(135deg, #c8522a, #8a3a1e);
+}
+.thumb-2 {
+  background: linear-gradient(135deg, #3a6b5c, #1e3d33);
+}
+.thumb-3 {
+  background: linear-gradient(135deg, #4a5c8a, #1e2a3d);
+}
+.card-body {
+  padding: 26px;
+}
+.card-tag {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.card-title {
+  font-family: "DM Serif Display", serif;
+  font-size: 20px;
+  margin: 8px 0 10px;
+  color: var(--bg);
+}
+.card-desc {
+  font-size: 14px;
+  color: rgba(245, 242, 236, 0.45);
+  margin-bottom: 19px;
+  line-height: 1.6;
+}
+.card-link {
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  padding-bottom: 2px;
+  letter-spacing: 1px;
+  transition:
+    color var(--transition),
+    border-color var(--transition);
+}
+.card-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+/* CONTACT */
+.contact {
+  /* list qilyapti*/
+  padding: 128px 48px;
+  border-top: 1px solid var(--border);
+}
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 96px;
+  align-items: start;
+}
+/* chap info */
+.contact-info .section-title {
+  /* pastga suryapti*/
+  margin-bottom: 16px;
+}
+.contact-sub {
+  color: var(--muter);
+  font-size: 16px;
+  margin-bottom: 40px;
+  max-width: 340px;
+  border-bottom: 1px solid var(--border);
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  margin-bottom: 40px;
+}
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.detail-label {
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muter);
+}
+.detail-val {
+  font-size: 15px;
+  color: var(--muter);
+  text-decoration: none;
+  transition: color var(--transition);
+  border-bottom: 1px solid var(--border);
+}
+.detail-val:hover {
+  color: var(--accent);
+}
+.socials {
+  display: flex;
+  gap: 32px;
+}
+.social-link {
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muter);
+  position: relative;
+  transition: color var(--transition);
+}
+.social-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: wigth var(--transition);
+}
+.social-link:hover {
+  columns: var(--ink);
+}
+.social-link:hover::after {
+  width: 100%;
+}
+/* form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muter);
+}
+.form-group input,
+.form-group textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 11px;
+  font-family: "DM Serif Display", serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink);
+  outline: none;
+  transition: border-color var(--transition);
+  resize: none;
+  width: 100%;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--border);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+}
+.form-btn {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 8px;
+  padding: 16px 32px;
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--ink);
+  font-family: "DM Serif Display", serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
+  align-self: flex-start;
+}
+.form-btn:hover {
+  background: transparent;
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+.form-btn-arrow {
+  transition: transform var(--transition);
+}
+.form-btn:hover .form-btn-arrow {
+  transform: translateX(4px);
+}
+.footer {
+  padding: 20px 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--muter);
+  letter-spacing: 1px;
+  gap: 12px;
+}
+.footer-line {
+  width: 1px;
+  height: 25px;
+  background: rgba(104, 17, 17, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .about-inner {
+    /* Rasm ustuni 420px edi - endi ekranga moslab o`tkazamiz*/
+    grid-template-columns: minmax(0, 340px) 1fr;
+    gap: 56px;
+  }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contact-inner {
+    gap: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 18px 24px;
+  }
+  .navbar-links {
+    gap: 22px;
+  }
+  .hero-stats {
+    display: none;
+  }
+  .about {
+    padding: 88px 32px;
+  }
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .about-img-wrap {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .about-img-tag {
+    right: -12px;
+  }
+  .work {
+    padding: 88px 32px;
+  }
+  .cards {
+    gap: 20px;
+  }
+  .contact {
+    padding: 88px 32px;
+  }
+  .contact-inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .contact-sub {
+    max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .navbar {
+    padding: 14px 16px;
+  }
+  .navbar-logo {
+    font-size: 17px;
+  }
+  .navbar-links {
+    gap: 10px;
+  }
+  .navbar-links a {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+  .hero-center {
+    padding: 0 20px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .heor-title {
+    font-size: clamp(40px, 12vw, 64px);
+  }
+  .hero-desc {
+    margin-top: 18px;
+    font-size: 15px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .btn,
+  .btn-ghost {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+  .about,
+  .work,
+  .contact {
+    padding: 56px 20px;
+  }
+  .about-inner,
+  .contact-inner {
+    gap: 36px;
+  }
+  .about-img-wrap {
+    width: 100%;
+    max-width: 100%;
+  }
+  .about-img-tag {
+    right: 0;
+    bottom: 16px;
+    padding: 12px 16px;
+  }
+  .about-img-tag .stat-num {
+    font-size: 22px;
+  }
+  .section-title {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+  .about-text {
+    font-size: 15px;
+  }
+  .skill-item {
+    gap: 14px;
+    padding: 12px 0;
+  }
+  .skill-name {
+    font-size: 14px;
+  }
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .card-thumb {
+    height: 180px;
+  }
+  .card-body {
+    padding: 20px;
+  }
+  .card-title {
+    font-size: 18px;
+  }
+  .contact-form {
+    gap: 16px;
+  }
+  .form-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .socials {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    padding: 20px 16px;
+  }
+}
+@media (max-width: 380px) {
+  .heor-title {
+    font-size: clamp(34px, 13vw, 56px);
+  }
+  .hero-eyebrow {
+    letter-spacing: 1.5px;
+  }
+  .navbar-links {
+    gap: 6px;
+  }
+  .navbar-links a {
+    padding: 4px 4px;
+    font-size: 11px;
+  }
+  .about-img-tag {
+    padding: 10px 13px;
+  }
+  .card-desc {
+    font-size: 13px;
+  }
+}
